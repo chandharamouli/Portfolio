@@ -1,5 +1,7 @@
 import { personal } from "@/data/portfolio";
 
+const profileImg = `${import.meta.env.BASE_URL}profile.png`;
+
 export default function Hero() {
   return (
     <section
@@ -10,16 +12,37 @@ export default function Hero() {
       <div className="flex items-center gap-3 mb-8">
         <span className="w-8 h-px bg-stone-300" />
         <span className="font-mono text-xs tracking-widest uppercase text-stone-400">
-          {personal.title} · {personal.location}
+          {personal.title}
         </span>
       </div>
 
-      {/* Name */}
-      <h1 className="font-serif text-[clamp(3.5rem,9vw,8rem)] leading-[0.95] tracking-tight text-stone-900 mb-8">
-        <span className="block">Chandra</span>
-        <span className="block italic text-stone-400">mouli</span>
-        <span className="block">Narni</span>
-      </h1>
+      {/* Name + circular avatar */}
+      <div className="flex items-center justify-between gap-8 mb-8">
+        <h1 className="font-serif text-[clamp(3.5rem,9vw,8rem)] leading-[0.95] tracking-tight text-stone-900">
+          <span className="block animate-name-reveal" style={{ animationDelay: "0.1s" }}>
+            Chandra
+          </span>
+          <span
+            className="block italic text-stone-400 animate-name-reveal"
+            style={{ animationDelay: "0.35s" }}
+          >
+            mouli
+          </span>
+          <span className="block animate-name-reveal" style={{ animationDelay: "0.6s" }}>
+            Narni
+          </span>
+        </h1>
+
+        <div className="hidden md:block flex-shrink-0 ml-auto">
+          <div className="w-64 h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 rounded-full overflow-hidden bg-stone-100 border border-stone-200 shadow-lg">
+            <img
+              src={profileImg}
+              alt={personal.name}
+              className="w-full h-full object-cover object-top grayscale"
+            />
+          </div>
+        </div>
+      </div>
 
       {/* Tagline */}
       <p className="max-w-lg text-stone-500 text-lg leading-relaxed mb-10 font-light">

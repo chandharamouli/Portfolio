@@ -8,7 +8,7 @@ export default function Footer() {
           © 2026 {personal.name}
         </span>
         <span className="font-mono text-xs text-stone-400">
-          {personal.location} · {personal.email}
+          {personal.email}
         </span>
       </div>
     </footer>

@@ -18,7 +18,7 @@ export default function Contact() {
             <em className="text-stone-400">real.</em>
           </h3>
           <p className="text-stone-500 leading-relaxed mb-10">
-            Open to senior GenAI engineering roles — on-site or hybrid in the US. If you're building
+            Open to senior GenAI engineering roles - on-site or hybrid in the US. If you're building
             systems that need to survive production, I'd like to talk.
           </p>
 

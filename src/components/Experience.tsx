@@ -53,8 +53,12 @@ export default function Experience() {
             </div>
             <div className="flex flex-wrap gap-3 font-mono text-xs text-stone-400">
               <span>{job.company}</span>
-              <span>·</span>
-              <span>{job.location}</span>
+              {job.location && (
+                <>
+                  <span>·</span>
+                  <span>{job.location}</span>
+                </>
+              )}
               <span>·</span>
               <span>{job.period}</span>
             </div>

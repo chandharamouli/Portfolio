@@ -22,3 +22,23 @@
     @apply bg-stone-200;
   }
 }
+
+@layer utilities {
+  @keyframes name-reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(0.4em);
+      filter: blur(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .animate-name-reveal {
+    opacity: 0;
+    animation: name-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+}

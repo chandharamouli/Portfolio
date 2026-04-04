@@ -25,9 +25,7 @@ export default function Nav() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <span className="font-mono text-xs tracking-widest uppercase text-stone-400">
-          {personal.nameShort}
-        </span>
+        <span />
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
