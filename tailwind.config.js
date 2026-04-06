@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["Playfair Display", "Georgia", "serif"],
-        mono: ["JetBrains Mono", "Fira Code", "monospace"],
-        sans: ["DM Sans", "system-ui", "sans-serif"],
+        serif: ['"Instrument Serif"', "Georgia", "serif"],
+        mono: ['"JetBrains Mono"', "Fira Code", "monospace"],
+        sans: ['"Inter"', "system-ui", "sans-serif"],
       },
     },
   },

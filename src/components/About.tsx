@@ -1,60 +1,71 @@
-import { personal, skills } from "@/data/portfolio";
+import { motion } from "framer-motion";
+import { personal } from "@/data/portfolio";
+import { Reveal, SectionHeader, staggerParent, staggerChild } from "@/components/primitives/Reveal";
+
+const focusAreas = [
+  {
+    label: "Agentic GenAI",
+    detail: "Multi-agent systems, MCP tool discovery, LangGraph orchestration",
+  },
+  {
+    label: "Hybrid RAG",
+    detail: "Pinecone + Neo4j Graph RAG, intelligent query routing, faithfulness gates",
+  },
+  {
+    label: "LLMOps",
+    detail: "Ragas eval pipelines, LangSmith tracing, cost-aware model routing",
+  },
+  {
+    label: "Safety & Guardrails",
+    detail: "Two-pass validation, PII filtering, domain-specific constraints",
+  },
+];
 
 export default function About() {
   return (
-    <section id="about" className="bg-stone-50 border-y border-stone-100">
-      <div className="max-w-6xl mx-auto px-6 py-24">
-        {/* Header */}
-        <div className="flex items-baseline gap-4 mb-16">
-          <span className="font-mono text-xs text-stone-300 tracking-widest">01</span>
-          <h2 className="font-serif text-4xl text-stone-900">About</h2>
-          <div className="flex-1 h-px bg-stone-200 ml-2" />
-        </div>
+    <section id="about" className="relative py-32 border-t border-zinc-200">
+      <div className="max-w-6xl mx-auto px-6">
+        <SectionHeader index="01" title="About" kicker="Who I am" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Bio */}
-          <div className="space-y-5">
-            {personal.about.map((para, i) => (
-              <p key={i} className="text-stone-600 leading-relaxed text-[1.0625rem]">
-                {para}
-              </p>
-            ))}
-
-            {/* Top tags */}
-            <div className="flex flex-wrap gap-2 pt-4">
-              {["LangGraph", "Google ADK", "Neo4j", "MCP Servers", "Pinecone", "AWS", "GCP", "FastAPI", "Python"].map(
-                (tag) => (
-                  <span
-                    key={tag}
-                    className="font-mono text-[0.65rem] tracking-widest uppercase px-3 py-1.5 border border-stone-200 text-stone-500 hover:border-stone-400 hover:text-stone-700 transition-all duration-150 cursor-default"
-                  >
-                    {tag}
-                  </span>
-                )
-              )}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <Reveal className="lg:col-span-7">
+            <div className="space-y-6">
+              {personal.about.map((para, i) => (
+                <p key={i} className="text-zinc-500 text-[1.0625rem] leading-relaxed font-light">
+                  {para}
+                </p>
+              ))}
             </div>
-          </div>
+          </Reveal>
 
-          {/* Skills grid */}
-          <div className="space-y-8">
-            {skills.map((group) => (
-              <div key={group.category}>
-                <div className="font-mono text-[0.65rem] tracking-widest uppercase text-stone-400 mb-3">
-                  {group.category}
+          <motion.div
+            variants={staggerParent}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="lg:col-span-5 space-y-4"
+          >
+            <div className="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-zinc-400 mb-6">
+              Core focus
+            </div>
+            {focusAreas.map((area) => (
+              <motion.div
+                key={area.label}
+                variants={staggerChild}
+                whileHover={{ x: 4 }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                className="group border border-zinc-200 hover:border-zinc-300 bg-white hover:bg-zinc-50 p-5 rounded-lg transition-colors shadow-sm hover:shadow-md"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-serif text-xl text-zinc-900">{area.label}</h3>
+                  <span className="font-mono text-zinc-300 group-hover:text-zinc-500 transition-colors">
+                    →
+                  </span>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <span
-                      key={item}
-                      className="font-mono text-[0.7rem] px-2.5 py-1 bg-white border border-stone-200 text-stone-600 rounded-sm"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
+                <p className="text-sm text-zinc-400 leading-relaxed">{area.detail}</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

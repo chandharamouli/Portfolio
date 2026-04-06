@@ -47,6 +47,7 @@ export const skills = [
     items: [
       "AWS (EKS, SageMaker, Bedrock)",
       "GCP (Vertex AI, GKE)",
+      "Azure (AKS, OpenAI, ML Studio)",
       "Docker / Kubernetes",
       "Terraform",
       "FastAPI / Node.js",
@@ -64,6 +65,61 @@ export const skills = [
       "PySpark / Kafka",
       "MLflow / Vertex AI Pipelines",
     ],
+  },
+];
+
+export const projects = [
+  {
+    title: "Hybrid RAG with Intelligent Routing",
+    subtitle: "Telecom · Production",
+    year: "2024",
+    description:
+      "A retrieval system that routes queries between vector and graph backends based on structural intent. Pure embedding search failed on multi-hop equipment questions; graph traversal fixed that while Pinecone handled semantic similarity.",
+    impact: [
+      "Resolved multi-hop queries that pure vector search couldn't handle",
+      "Prompt-based router selects retrieval path by query structure",
+      "Faithfulness and context precision gates via Ragas before deploy",
+    ],
+    tech: ["Pinecone", "Neo4j Graph RAG", "LangChain", "Ragas", "FastAPI"],
+  },
+  {
+    title: "Multi-Agent Orchestration Platform",
+    subtitle: "Enterprise · Agentic Systems",
+    year: "2024",
+    description:
+      "Three-layer agent stack separating runtime, reasoning, and tool abstraction. MCP servers expose enterprise CRM and knowledge systems so agents discover tools dynamically with zero hardcoded endpoint logic.",
+    impact: [
+      "Stateful orchestration across Google ADK, LangGraph, and LangChain",
+      "Dynamic tool discovery via MCP - no endpoint coupling in agent layer",
+      "Deterministic failure recovery and session replay via LangGraph",
+    ],
+    tech: ["Google ADK", "LangGraph", "LangChain", "MCP Servers", "LangSmith"],
+  },
+  {
+    title: "LLM Guardrails & Evaluation Pipeline",
+    subtitle: "Safety · LLMOps",
+    year: "2024",
+    description:
+      "Two-pass safety system combining fast regex screening for known injection patterns with LLM-based recheck for ambiguous ones. Ragas gates every deployment; LLM-as-Judge catches grounding errors automated metrics miss.",
+    impact: [
+      "Two-pass guardrails - regex first, LLM recheck for ambiguous cases",
+      "Ragas as primary deploy gate, LLM-as-Judge as secondary signal",
+      "PII filtering and telecom domain validators running in production",
+    ],
+    tech: ["Guardrails AI", "Ragas", "LLM-as-Judge", "LangSmith", "Python"],
+  },
+  {
+    title: "Healthcare Claims ML Platform",
+    subtitle: "Healthcare · Applied ML",
+    year: "2022",
+    description:
+      "Wide & Deep networks combining static claim features with sequential patient history from Word2Vec and LSTM embeddings. Moved features to Vertex AI Feature Store after batch/realtime drift was quietly degrading predictions.",
+    impact: [
+      "Closed batch/realtime feature skew that was hurting prediction quality",
+      "BioBERT clinical NLP pipelines in a PHI-compliant environment",
+      "CI/CD via Vertex AI Pipelines with MLflow experiment tracking",
+    ],
+    tech: ["TensorFlow", "Vertex AI", "BioBERT", "FAISS", "MLflow", "GKE"],
   },
 ];
 

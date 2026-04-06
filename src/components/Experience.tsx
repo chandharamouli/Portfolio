@@ -1,91 +1,70 @@
-import { useState } from "react";
+import { motion } from "framer-motion";
 import { experience } from "@/data/portfolio";
+import { SectionHeader, staggerParent, staggerChild } from "@/components/primitives/Reveal";
 
 export default function Experience() {
-  const [active, setActive] = useState(0);
-  const job = experience[active];
-
   return (
-    <section id="experience" className="max-w-6xl mx-auto px-6 py-24">
-      {/* Header */}
-      <div className="flex items-baseline gap-4 mb-16">
-        <span className="font-mono text-xs text-stone-300 tracking-widest">02</span>
-        <h2 className="font-serif text-4xl text-stone-900">Experience</h2>
-        <div className="flex-1 h-px bg-stone-200 ml-2" />
-      </div>
+    <section id="experience" className="relative py-32 border-t border-zinc-200">
+      <div className="max-w-6xl mx-auto px-6">
+        <SectionHeader index="04" title="Experience" kicker="Timeline" />
 
-      <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-0">
-        {/* Sidebar tabs */}
-        <div className="flex md:flex-col border-b md:border-b-0 md:border-r border-stone-100 overflow-x-auto md:overflow-visible mb-8 md:mb-0">
-          {experience.map((job, i) => (
-            <button
-              key={job.company}
-              onClick={() => setActive(i)}
-              className={`flex-shrink-0 md:flex-shrink text-left px-4 py-4 md:py-5 transition-all duration-150 border-b-2 md:border-b-0 md:border-l-2 ${
-                active === i
-                  ? "border-stone-900 text-stone-900"
-                  : "border-transparent text-stone-400 hover:text-stone-600 hover:border-stone-200"
-              }`}
-            >
-              <div className="font-mono text-xs tracking-widest uppercase whitespace-nowrap md:whitespace-normal">
-                {job.company}
-              </div>
-              {active === i && (
-                <div className="hidden md:block font-mono text-[0.6rem] text-stone-400 mt-1">
+        <motion.div
+          variants={staggerParent}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          className="relative"
+        >
+          <div className="absolute left-0 md:left-[180px] top-2 bottom-2 w-px bg-zinc-200" />
+
+          <div className="space-y-14">
+            {experience.map((job) => (
+              <motion.div
+                key={job.company + job.period}
+                variants={staggerChild}
+                className="relative grid grid-cols-1 md:grid-cols-[180px_1fr] gap-6 md:gap-12 pl-6 md:pl-0"
+              >
+                <div className="absolute left-0 md:left-[180px] top-2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-zinc-300 ring-4 ring-white" />
+
+                <div className="font-mono text-[0.65rem] tracking-[0.18em] uppercase text-zinc-400 md:text-right md:pr-8">
                   {job.period}
                 </div>
-              )}
-            </button>
-          ))}
-        </div>
 
-        {/* Content panel */}
-        <div className="md:pl-12">
-          {/* Role header */}
-          <div className="mb-8">
-            <div className="flex flex-wrap items-baseline gap-3 mb-2">
-              <h3 className="font-serif text-2xl text-stone-900">{job.role}</h3>
-              {job.current && (
-                <span className="font-mono text-[0.6rem] tracking-widest uppercase px-2 py-0.5 bg-emerald-50 text-emerald-600 border border-emerald-200">
-                  Current
-                </span>
-              )}
-            </div>
-            <div className="flex flex-wrap gap-3 font-mono text-xs text-stone-400">
-              <span>{job.company}</span>
-              {job.location && (
-                <>
-                  <span>·</span>
-                  <span>{job.location}</span>
-                </>
-              )}
-              <span>·</span>
-              <span>{job.period}</span>
-            </div>
-          </div>
+                <div className="md:pl-8">
+                  <div className="flex flex-wrap items-baseline gap-3 mb-1">
+                    <h3 className="font-serif text-2xl text-zinc-900">{job.role}</h3>
+                    {job.current && (
+                      <span className="font-mono text-[0.55rem] tracking-[0.2em] uppercase px-2 py-0.5 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-full">
+                        ● Current
+                      </span>
+                    )}
+                  </div>
+                  <div className="font-mono text-xs text-zinc-400 mb-5">{job.company}</div>
 
-          {/* Bullets */}
-          <ul className="space-y-4 mb-8">
-            {job.highlights.map((item, i) => (
-              <li key={i} className="flex gap-4">
-                <span className="font-mono text-stone-300 text-sm mt-0.5 flex-shrink-0">→</span>
-                <p className="text-stone-600 leading-relaxed text-[0.9375rem]">{item}</p>
-              </li>
-            ))}
-          </ul>
+                  <p className="text-sm text-zinc-500 leading-relaxed mb-5 font-light max-w-2xl">
+                    {job.highlights[0]}
+                  </p>
 
-          {/* Tech badges */}
-          <div className="flex flex-wrap gap-2">
-            {job.tech.map((t) => (
-              <span
-                key={t}
-                className="font-mono text-[0.65rem] tracking-wide px-2.5 py-1 bg-stone-50 border border-stone-200 text-stone-500"
-              >
-                {t}
-              </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {job.tech.slice(0, 6).map((t) => (
+                      <span
+                        key={t}
+                        className="font-mono text-[0.6rem] tracking-wide px-2 py-1 bg-zinc-100 border border-zinc-200 text-zinc-500 rounded"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                    {job.tech.length > 6 && (
+                      <span className="font-mono text-[0.6rem] tracking-wide px-2 py-1 text-zinc-400">
+                        +{job.tech.length - 6} more
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

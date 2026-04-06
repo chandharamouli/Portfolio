@@ -1,83 +1,170 @@
+import { lazy, Suspense } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDownRight, Mail } from "lucide-react";
 import { personal } from "@/data/portfolio";
+import { TextReveal, CountUp } from "@/components/primitives/Reveal";
+import MagneticButton from "@/components/primitives/MagneticButton";
 
+const HeroScene = lazy(() => import("@/components/three/HeroScene"));
 const profileImg = `${import.meta.env.BASE_URL}profile.png`;
 
 export default function Hero() {
+  const reduce = useReducedMotion();
+
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.14, delayChildren: 0.3 } },
+  };
+
+  const fade = {
+    hidden: { opacity: 0, y: reduce ? 0 : 20 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
+    },
+  };
+
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col justify-center px-6 pt-24 pb-16 max-w-6xl mx-auto"
+      className="relative min-h-screen flex items-center overflow-hidden bg-zinc-950 bg-glow-top"
     >
-      {/* Eyebrow */}
-      <div className="flex items-center gap-3 mb-8">
-        <span className="w-8 h-px bg-stone-300" />
-        <span className="font-mono text-xs tracking-widest uppercase text-stone-400">
-          {personal.title}
-        </span>
-      </div>
-
-      {/* Name + circular avatar */}
-      <div className="flex items-center justify-between gap-8 mb-8">
-        <h1 className="font-serif text-[clamp(3.5rem,9vw,8rem)] leading-[0.95] tracking-tight text-stone-900">
-          <span className="block animate-name-reveal" style={{ animationDelay: "0.1s" }}>
-            Chandra
-          </span>
-          <span
-            className="block italic text-stone-400 animate-name-reveal"
-            style={{ animationDelay: "0.35s" }}
-          >
-            mouli
-          </span>
-          <span className="block animate-name-reveal" style={{ animationDelay: "0.6s" }}>
-            Narni
-          </span>
-        </h1>
-
-        <div className="hidden md:block flex-shrink-0 ml-auto">
-          <div className="w-64 h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 rounded-full overflow-hidden bg-stone-100 border border-stone-200 shadow-lg">
-            <img
-              src={profileImg}
-              alt={personal.name}
-              className="w-full h-full object-cover object-top grayscale"
-            />
-          </div>
+      {/* 3D scene layer */}
+      {!reduce && (
+        <div className="absolute inset-0 opacity-60 pointer-events-none">
+          <Suspense fallback={null}>
+            <HeroScene />
+          </Suspense>
         </div>
-      </div>
+      )}
 
-      {/* Tagline */}
-      <p className="max-w-lg text-stone-500 text-lg leading-relaxed mb-10 font-light">
-        {personal.tagline}
-      </p>
+      {/* Grain */}
+      <div className="absolute inset-0 bg-grain pointer-events-none mix-blend-overlay" />
 
-      {/* CTAs */}
-      <div className="flex flex-wrap gap-3 mb-20">
-        <a
-          href={`mailto:${personal.email}`}
-          className="font-mono text-xs tracking-widest uppercase px-6 py-3 bg-stone-900 text-white hover:bg-stone-700 transition-colors duration-200"
+      {/* Radial mask */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,transparent,rgba(9,9,11,0.85)_80%)] pointer-events-none" />
+
+      {/* Top line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
+
+      <div className="relative max-w-6xl mx-auto w-full px-6 pt-28 pb-16">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center"
         >
-          Get in touch
-        </a>
-        <button
-          onClick={() => document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" })}
-          className="font-mono text-xs tracking-widest uppercase px-6 py-3 border border-stone-200 text-stone-500 hover:border-stone-400 hover:text-stone-900 transition-all duration-200"
-        >
-          See my work
-        </button>
-      </div>
+          <div>
+            {/* Eyebrow */}
+            <motion.div variants={fade} className="flex items-center gap-3 mb-6">
+              <span className="w-10 h-px bg-zinc-700" />
+              <span className="font-mono text-[0.7rem] tracking-[0.25em] uppercase text-zinc-500">
+                {personal.title} / Available for work
+              </span>
+            </motion.div>
 
-      {/* Stats */}
-      <div className="border-t border-stone-100 pt-10 grid grid-cols-2 sm:grid-cols-4 gap-8">
-        {[
-          { num: "9+", label: "Years exp." },
-          { num: "4", label: "Companies" },
-          { num: "3", label: "Industries" },
-          { num: "2", label: "Certifications" },
-        ].map(({ num, label }) => (
-          <div key={label}>
-            <div className="font-serif text-4xl text-stone-900 leading-none mb-1">{num}</div>
-            <div className="font-mono text-xs tracking-widest uppercase text-stone-400">{label}</div>
+            {/* Name */}
+            <h1
+              className="font-serif leading-[0.88] tracking-tight text-white mb-6"
+              style={{ fontSize: "clamp(4rem, 10vw, 9rem)" }}
+            >
+              {["Chandra", "mouli", "Narni"].map((word, i) => (
+                <div key={word} className="overflow-hidden">
+                  <motion.span
+                    initial={{ y: "110%" }}
+                    animate={{ y: 0 }}
+                    transition={{
+                      duration: 0.9,
+                      delay: 0.3 + i * 0.15,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className={`block ${word === "mouli" ? "italic text-zinc-400" : ""}`}
+                  >
+                    {word}
+                  </motion.span>
+                </div>
+              ))}
+            </h1>
+
+            {/* Tagline */}
+            <motion.p
+              variants={fade}
+              className="max-w-xl text-zinc-300 text-lg leading-relaxed font-light mb-8"
+            >
+              I build{" "}
+              <span className="text-white font-normal">operational-grade GenAI systems</span>{" "}
+              that ship to production — not prototypes that gather dust.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div variants={fade} className="flex flex-wrap gap-3">
+              <MagneticButton
+                as="a"
+                href="#projects"
+                className="group inline-flex items-center gap-2 font-mono text-[0.7rem] tracking-[0.2em] uppercase px-6 py-3.5 bg-zinc-100 text-zinc-950 hover:bg-white rounded-full transition-all duration-200"
+              >
+                View work
+                <ArrowDownRight
+                  size={14}
+                  className="group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform"
+                />
+              </MagneticButton>
+              <MagneticButton
+                as="a"
+                href={`mailto:${personal.email}`}
+                className="inline-flex items-center gap-2 font-mono text-[0.7rem] tracking-[0.2em] uppercase px-6 py-3.5 border border-zinc-800 text-zinc-300 hover:text-zinc-100 hover:border-zinc-600 rounded-full transition-all duration-200"
+              >
+                <Mail size={14} />
+                Contact
+              </MagneticButton>
+            </motion.div>
           </div>
-        ))}
+
+          {/* Avatar */}
+          <motion.div variants={fade} className="justify-self-center lg:justify-self-end">
+            <div className="relative">
+              <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-zinc-700/40 via-transparent to-zinc-800/20 blur-2xl" />
+              <motion.div
+                initial={{ scale: 0.85, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 1.4, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="relative w-56 h-56 lg:w-80 lg:h-80 rounded-full overflow-hidden border border-zinc-800"
+              >
+                <img
+                  src={profileImg}
+                  alt={personal.name}
+                  className="w-full h-full object-cover object-top grayscale contrast-110"
+                />
+                <div className="absolute inset-0 ring-1 ring-inset ring-white/5 rounded-full" />
+              </motion.div>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Stats band — count-up animation */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-16 pt-8 border-t border-zinc-800 grid grid-cols-2 sm:grid-cols-4 gap-8"
+        >
+          {[
+            { to: 9, suffix: "+", label: "Years in ML/AI" },
+            { to: 4, suffix: "", label: "Industries" },
+            { to: 6, suffix: "+", label: "Production LLM systems" },
+            { to: 2, suffix: "", label: "Cloud certifications" },
+          ].map(({ to, suffix, label }) => (
+            <div key={label}>
+              <div className="font-serif text-4xl text-zinc-100 leading-none mb-2">
+                <CountUp to={to} suffix={suffix} />
+              </div>
+              <div className="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-zinc-500">
+                {label}
+              </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

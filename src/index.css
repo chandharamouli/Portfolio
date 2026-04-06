@@ -8,37 +8,94 @@
   }
 
   body {
-    @apply antialiased;
+    @apply antialiased bg-white text-zinc-900 font-sans;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  /* Hide native cursor on desktop when custom cursor is active */
+  @media (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
+  }
+
+  ::selection {
+    @apply bg-zinc-100 text-zinc-950;
   }
 
   /* Scrollbar */
   ::-webkit-scrollbar {
-    width: 4px;
+    width: 6px;
+    height: 6px;
   }
   ::-webkit-scrollbar-track {
     @apply bg-white;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-stone-200;
+    @apply bg-zinc-300 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-400;
   }
 }
 
 @layer utilities {
-  @keyframes name-reveal {
-    0% {
-      opacity: 0;
-      transform: translateY(0.4em);
-      filter: blur(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
+  /* Grain/noise overlay utility */
+  .bg-grain {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 0
+    );
+    background-size: 24px 24px;
   }
 
-  .animate-name-reveal {
-    opacity: 0;
-    animation: name-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  /* Subtle radial highlight from top */
+  .bg-glow-top {
+    background-image: radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      rgba(255, 255, 255, 0.08),
+      transparent
+    );
+  }
+
+  /* Marquee scroll */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  .animate-marquee {
+    animation: marquee 35s linear infinite;
+  }
+  .group:hover .animate-marquee {
+    animation-play-state: paused;
+  }
+
+  /* Gradient border helper */
+  .border-gradient {
+    position: relative;
+  }
+  .border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.02) 40%,
+      transparent
+    );
+    border-radius: inherit;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
 }
