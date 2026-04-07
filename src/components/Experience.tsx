@@ -4,7 +4,7 @@ import { SectionHeader, staggerParent, staggerChild } from "@/components/primiti
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-32 border-t border-zinc-200">
+    <section id="experience" className="relative py-32 border-t border-white/10">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader index="04" title="Experience" kicker="Timeline" />
 
@@ -15,7 +15,7 @@ export default function Experience() {
           viewport={{ once: true, margin: "-80px" }}
           className="relative"
         >
-          <div className="absolute left-0 md:left-[180px] top-2 bottom-2 w-px bg-zinc-200" />
+          <div className="absolute left-0 md:left-[180px] top-2 bottom-2 w-px bg-white/10" />
 
           <div className="space-y-14">
             {experience.map((job) => (
@@ -24,24 +24,24 @@ export default function Experience() {
                 variants={staggerChild}
                 className="relative grid grid-cols-1 md:grid-cols-[180px_1fr] gap-6 md:gap-12 pl-6 md:pl-0"
               >
-                <div className="absolute left-0 md:left-[180px] top-2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-zinc-300 ring-4 ring-white" />
+                <div className="absolute left-0 md:left-[180px] top-2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-cyan-200 ring-4 ring-[#030712]" />
 
                 <div className="font-mono text-[0.65rem] tracking-[0.18em] uppercase text-zinc-400 md:text-right md:pr-8">
                   {job.period}
                 </div>
 
-                <div className="md:pl-8">
+                <div className="md:pl-8 glass-panel rounded-[1.75rem] p-6 sm:p-7">
                   <div className="flex flex-wrap items-baseline gap-3 mb-1">
-                    <h3 className="font-serif text-2xl text-zinc-900">{job.role}</h3>
+                    <h3 className="font-serif text-2xl text-zinc-50">{job.role}</h3>
                     {job.current && (
-                      <span className="font-mono text-[0.55rem] tracking-[0.2em] uppercase px-2 py-0.5 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-full">
+                      <span className="font-mono text-[0.55rem] tracking-[0.2em] uppercase px-2 py-0.5 bg-emerald-400/10 text-emerald-300 border border-emerald-400/20 rounded-full">
                         ● Current
                       </span>
                     )}
                   </div>
                   <div className="font-mono text-xs text-zinc-400 mb-5">{job.company}</div>
 
-                  <p className="text-sm text-zinc-500 leading-relaxed mb-5 font-light max-w-2xl">
+                  <p className="text-sm text-zinc-300/80 leading-relaxed mb-5 font-light max-w-2xl">
                     {job.highlights[0]}
                   </p>
 
@@ -49,7 +49,7 @@ export default function Experience() {
                     {job.tech.slice(0, 6).map((t) => (
                       <span
                         key={t}
-                        className="font-mono text-[0.6rem] tracking-wide px-2 py-1 bg-zinc-100 border border-zinc-200 text-zinc-500 rounded"
+                        className="font-mono text-[0.6rem] tracking-wide px-2 py-1 bg-white/[0.06] border border-white/10 text-zinc-300 rounded"
                       >
                         {t}
                       </span>

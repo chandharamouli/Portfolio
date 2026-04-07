@@ -86,7 +86,7 @@ export function TextReveal({
 export function LineReveal({ delay = 0, className = "" }: { delay?: number; className?: string }) {
   return (
     <motion.div
-      className={`h-px bg-zinc-200 ${className}`}
+      className={`h-px bg-white/10 ${className}`}
       initial={{ scaleX: 0 }}
       whileInView={{ scaleX: 1 }}
       viewport={{ once: true }}
@@ -150,18 +150,18 @@ export function SectionHeader({ index, title, kicker }: SectionHeaderProps) {
     <Reveal className="mb-16">
       <div className="flex items-end justify-between gap-6 pb-6">
         <div className="flex items-baseline gap-5">
-          <span className="font-mono text-xs tracking-[0.2em] text-zinc-500">{index}</span>
-          <h2 className="font-serif text-4xl sm:text-5xl text-zinc-950 tracking-tight">
+          <span className="font-mono text-xs tracking-[0.2em] text-cyan-200/70">{index}</span>
+          <h2 className="font-serif text-4xl sm:text-5xl text-zinc-50 tracking-tight">
             {title}
           </h2>
         </div>
         {kicker && (
-          <span className="hidden sm:inline font-mono text-[0.65rem] tracking-[0.2em] uppercase text-zinc-500">
+          <span className="hidden sm:inline font-mono text-[0.65rem] tracking-[0.2em] uppercase text-zinc-400">
             {kicker}
           </span>
         )}
       </div>
-      <div className="h-px bg-zinc-300/80 w-full" />
+      <div className="h-px bg-white/10 w-full" />
     </Reveal>
   );
 }

@@ -5,7 +5,10 @@ import { SectionHeader, staggerParent, staggerChild } from "@/components/primiti
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative py-32 border-t border-zinc-200">
+    <section id="projects" className="relative py-32 border-t border-white/10">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute left-1/2 top-20 h-80 w-80 -translate-x-1/2 rounded-full bg-cyan-300/8 blur-3xl" />
+      </div>
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader index="03" title="Projects" kicker="Systems I've built" />
 
@@ -22,10 +25,11 @@ export default function Projects() {
               variants={staggerChild}
               whileHover={{ y: -10 }}
               transition={{ type: "spring", stiffness: 260, damping: 26 }}
-              className="group relative border border-zinc-200 hover:border-zinc-300 bg-white hover:bg-zinc-50/50 rounded-2xl p-8 transition-all duration-400 overflow-hidden shadow-sm hover:shadow-xl"
+              className="group relative glass-panel-strong rounded-[1.75rem] p-8 transition-all duration-400 overflow-hidden"
             >
+              <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-cyan-200/10 to-transparent" />
               {/* Large faded index number */}
-              <span className="absolute top-4 right-6 font-serif text-[7rem] leading-none text-zinc-100 select-none pointer-events-none group-hover:text-zinc-200 transition-colors duration-500">
+              <span className="absolute top-4 right-6 font-serif text-[7rem] leading-none text-white/5 select-none pointer-events-none group-hover:text-white/10 transition-colors duration-500">
                 {String(idx + 1).padStart(2, "0")}
               </span>
 
@@ -33,33 +37,33 @@ export default function Projects() {
                 <span className="font-mono text-[0.6rem] tracking-[0.22em] uppercase text-zinc-400">
                   {project.subtitle}
                 </span>
-                <span className="font-mono text-[0.6rem] tracking-[0.22em] text-zinc-400">
+                <span className="font-mono text-[0.6rem] tracking-[0.22em] text-zinc-500">
                   {project.year}
                 </span>
               </div>
 
-              <h3 className="relative font-serif text-2xl sm:text-[1.75rem] leading-tight text-zinc-900 mb-4 group-hover:text-black transition-colors">
+              <h3 className="relative font-serif text-2xl sm:text-[1.75rem] leading-tight text-zinc-50 mb-4 group-hover:text-white transition-colors">
                 {project.title}
               </h3>
 
-              <p className="relative text-sm text-zinc-500 leading-relaxed mb-6 font-light">
+              <p className="relative text-sm text-zinc-300/80 leading-relaxed mb-6 font-light">
                 {project.description}
               </p>
 
               <ul className="relative space-y-2 mb-8">
                 {project.impact.map((line, i) => (
-                  <li key={i} className="flex gap-3 text-sm text-zinc-500 leading-relaxed">
-                    <span className="font-mono text-zinc-300 flex-shrink-0 mt-0.5">◦</span>
+                  <li key={i} className="flex gap-3 text-sm text-zinc-300/80 leading-relaxed">
+                    <span className="font-mono text-cyan-200/60 flex-shrink-0 mt-0.5">◦</span>
                     <span>{line}</span>
                   </li>
                 ))}
               </ul>
 
-              <div className="relative flex flex-wrap gap-1.5 pt-6 border-t border-zinc-100 group-hover:border-zinc-200 transition-colors">
+              <div className="relative flex flex-wrap gap-1.5 pt-6 border-t border-white/10 group-hover:border-white/15 transition-colors">
                 {project.tech.map((t) => (
                   <span
                     key={t}
-                    className="font-mono text-[0.6rem] tracking-wide px-2 py-1 bg-zinc-100 border border-zinc-200 text-zinc-500 rounded"
+                    className="font-mono text-[0.6rem] tracking-wide px-2 py-1 bg-white/[0.06] border border-white/10 text-zinc-300 rounded"
                   >
                     {t}
                   </span>
@@ -67,7 +71,7 @@ export default function Projects() {
               </div>
 
               <div className="absolute top-8 right-8 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300 z-10">
-                <ArrowUpRight size={18} className="text-zinc-400" />
+                <ArrowUpRight size={18} className="text-cyan-200/80" />
               </div>
             </motion.article>
           ))}

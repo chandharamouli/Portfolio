@@ -96,7 +96,10 @@ function iconFor(label: string): { Icon: Icon; color: string } {
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-32 border-t border-zinc-200">
+    <section id="skills" className="relative py-32 border-t border-white/10">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute right-[-6rem] top-16 h-72 w-72 rounded-full bg-fuchsia-400/10 blur-3xl" />
+      </div>
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader index="02" title="Skills" kicker="Stack & tooling" />
 
@@ -111,11 +114,12 @@ export default function Skills() {
             <motion.div
               key={group.category}
               variants={staggerChild}
-              className="group relative border border-zinc-200 hover:border-zinc-300 bg-white rounded-2xl p-7 transition-all duration-300 shadow-sm hover:shadow-lg"
+              className="group relative glass-panel rounded-[1.75rem] p-7 transition-all duration-300 overflow-hidden"
             >
+              <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/40 to-transparent" />
               <div className="relative flex items-center justify-between mb-6">
-                <h3 className="font-serif text-xl text-zinc-900">{group.category}</h3>
-                <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-zinc-400">
+                <h3 className="font-serif text-xl text-zinc-50">{group.category}</h3>
+                <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-zinc-500">
                   {String(group.items.length).padStart(2, "0")}
                 </span>
               </div>
@@ -146,7 +150,7 @@ export default function Skills() {
                         scale: 1.04,
                         transition: { type: "spring", stiffness: 400, damping: 18 },
                       }}
-                      className="inline-flex items-center gap-2 font-mono text-[0.7rem] tracking-wide px-3 py-1.5 bg-zinc-50 border border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 hover:shadow-md rounded-full cursor-default transition-all duration-200"
+                      className="inline-flex items-center gap-2 font-mono text-[0.7rem] tracking-wide px-3 py-1.5 bg-white/[0.06] border border-white/10 text-zinc-300 hover:text-white hover:border-cyan-200/30 hover:bg-white/[0.1] rounded-full cursor-default transition-all duration-200"
                     >
                       <Icon
                         className="w-3.5 h-3.5 flex-shrink-0"

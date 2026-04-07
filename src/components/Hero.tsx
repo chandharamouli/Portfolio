@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDownRight, Mail } from "lucide-react";
 import { personal } from "@/data/portfolio";
-import { TextReveal, CountUp } from "@/components/primitives/Reveal";
+import { CountUp } from "@/components/primitives/Reveal";
 import MagneticButton from "@/components/primitives/MagneticButton";
 
 const HeroScene = lazy(() => import("@/components/three/HeroScene"));
@@ -32,7 +32,28 @@ export default function Hero() {
     >
       {/* 3D scene layer */}
       {!reduce && (
-        <div className="absolute inset-0 opacity-60 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none lg:hidden">
+          <div className="absolute inset-y-0 right-[-8%] w-[72%] opacity-90 lg:opacity-100 scale-[1.08]">
+            <Suspense fallback={null}>
+              <HeroScene />
+            </Suspense>
+          </div>
+        </div>
+      )}
+
+      {/* Atmosphere */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -left-24 top-16 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl" />
+        <div className="absolute right-0 top-24 h-96 w-96 rounded-full bg-sky-300/10 blur-3xl" />
+        <div className="absolute bottom-0 right-12 h-80 w-80 rounded-full bg-fuchsia-300/10 blur-3xl" />
+      </div>
+
+      {!reduce && (
+        <div className="absolute inset-y-10 right-6 hidden lg:block w-[34rem] rounded-[2.25rem] border border-white/10 bg-white/[0.02] shadow-[0_0_120px_rgba(56,189,248,0.08)] pointer-events-none">
+          <div className="absolute inset-0 rounded-[2.25rem] bg-[linear-gradient(135deg,rgba(255,255,255,0.1),transparent_38%,transparent)]" />
+          <div className="absolute left-8 top-8 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-zinc-500">
+            Interactive system canvas
+          </div>
           <Suspense fallback={null}>
             <HeroScene />
           </Suspense>
@@ -43,7 +64,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-grain pointer-events-none mix-blend-overlay" />
 
       {/* Radial mask */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,transparent,rgba(9,9,11,0.85)_80%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_55%_at_50%_50%,transparent,rgba(9,9,11,0.84)_78%)] pointer-events-none" />
 
       {/* Top line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />

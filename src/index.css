@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply antialiased bg-white text-zinc-900 font-sans;
+    @apply antialiased bg-[#030712] text-zinc-100 font-sans;
     font-feature-settings: "ss01", "cv11";
   }
 
@@ -20,7 +20,7 @@
   }
 
   ::selection {
-    @apply bg-zinc-100 text-zinc-950;
+    @apply bg-cyan-200 text-zinc-950;
   }
 
   /* Scrollbar */
@@ -29,17 +29,33 @@
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-white;
+    @apply bg-[#020617];
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-zinc-300 rounded-full;
+    @apply bg-zinc-700 rounded-full;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-zinc-400;
+    @apply bg-zinc-600;
   }
 }
 
 @layer utilities {
+  .bg-site-radial {
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.12), transparent 24%),
+      radial-gradient(circle at 82% 24%, rgba(192, 132, 252, 0.1), transparent 20%),
+      radial-gradient(circle at 50% 70%, rgba(56, 189, 248, 0.08), transparent 28%),
+      linear-gradient(180deg, #020617 0%, #030712 40%, #020617 100%);
+  }
+
+  .bg-site-grid {
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.85) 12%, rgba(0, 0, 0, 0.95) 86%, transparent);
+  }
+
   /* Grain/noise overlay utility */
   .bg-grain {
     background-image: radial-gradient(
@@ -57,6 +73,24 @@
       rgba(255, 255, 255, 0.08),
       transparent
     );
+  }
+
+  .glass-panel {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(18px);
+    box-shadow:
+      0 24px 80px rgba(2, 6, 23, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-panel-strong {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(22px);
+    box-shadow:
+      0 28px 90px rgba(2, 6, 23, 0.34),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   /* Marquee scroll */

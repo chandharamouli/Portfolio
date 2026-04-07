@@ -5,7 +5,10 @@ import { SectionHeader, staggerParent, staggerChild } from "@/components/primiti
 
 export default function Writing() {
   return (
-    <section id="writing" className="relative py-32 border-t border-zinc-200">
+    <section id="writing" className="relative py-32 border-t border-white/10">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute left-16 bottom-10 h-72 w-72 rounded-full bg-sky-300/8 blur-3xl" />
+      </div>
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader index="05" title="Writing" kicker="Notes & essays" />
 
@@ -25,24 +28,24 @@ export default function Writing() {
               href={post.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex flex-col p-6 border border-zinc-200 hover:border-zinc-300 bg-white hover:bg-zinc-50 rounded-xl transition-colors duration-300 shadow-sm hover:shadow-md"
+              className="group relative flex flex-col p-6 glass-panel rounded-[1.5rem] transition-colors duration-300"
             >
               <span className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-zinc-400 mb-5">
                 {post.tag}
               </span>
-              <h3 className="font-serif text-[1.1rem] leading-snug text-zinc-900 mb-4 group-hover:text-black transition-colors">
+              <h3 className="font-serif text-[1.1rem] leading-snug text-zinc-50 mb-4 group-hover:text-white transition-colors">
                 {post.title}
               </h3>
-              <p className="text-sm text-zinc-400 leading-relaxed flex-1 mb-6 font-light">
+              <p className="text-sm text-zinc-300/75 leading-relaxed flex-1 mb-6 font-light">
                 {post.excerpt}
               </p>
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-zinc-300 group-hover:text-zinc-500 transition-colors">
+                <span className="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-zinc-400 group-hover:text-cyan-200 transition-colors">
                   Read more
                 </span>
                 <ArrowUpRight
                   size={14}
-                  className="text-zinc-300 group-hover:text-zinc-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+                  className="text-zinc-500 group-hover:text-cyan-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
                 />
               </div>
             </motion.a>
