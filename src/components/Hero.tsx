@@ -6,7 +6,6 @@ import { CountUp } from "@/components/primitives/Reveal";
 import MagneticButton from "@/components/primitives/MagneticButton";
 
 const HeroScene = lazy(() => import("@/components/three/HeroScene"));
-const profileImg = `${import.meta.env.BASE_URL}profile.png`;
 
 export default function Hero() {
   const reduce = useReducedMotion();
@@ -74,9 +73,9 @@ export default function Hero() {
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center"
+          className="grid grid-cols-1 gap-12 items-center"
         >
-          <div>
+          <div className="lg:max-w-2xl">
             {/* Eyebrow */}
             <motion.div variants={fade} className="flex items-center gap-3 mb-6">
               <span className="w-10 h-px bg-zinc-700" />
@@ -141,26 +140,6 @@ export default function Hero() {
               </MagneticButton>
             </motion.div>
           </div>
-
-          {/* Avatar */}
-          <motion.div variants={fade} className="justify-self-center lg:justify-self-end">
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-zinc-700/40 via-transparent to-zinc-800/20 blur-2xl" />
-              <motion.div
-                initial={{ scale: 0.85, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 1.4, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="relative w-56 h-56 lg:w-80 lg:h-80 rounded-full overflow-hidden border border-zinc-800"
-              >
-                <img
-                  src={profileImg}
-                  alt={personal.name}
-                  className="w-full h-full object-cover object-top grayscale contrast-110"
-                />
-                <div className="absolute inset-0 ring-1 ring-inset ring-white/5 rounded-full" />
-              </motion.div>
-            </div>
-          </motion.div>
         </motion.div>
 
         {/* Stats band — count-up animation */}
